@@ -40,6 +40,7 @@ export class HealthController {
       
       // External service health check (if applicable)
       // () => this.http.pingCheck('external_api', 'https://api.example.com/health'),
+      // We will use above code when implement DB
     ]);
   }
 
