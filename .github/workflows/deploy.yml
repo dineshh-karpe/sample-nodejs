@@ -43,7 +43,7 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Deploy to DigitalOcean
-      uses: digitalocean/app_action@v1
+      uses: digitalocean/app_action@v2
       with:
         app_id: ${{ secrets.DIGITALOCEAN_APP_ID }}
         api_token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
