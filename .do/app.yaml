@@ -3,7 +3,7 @@ services:
 - name: web
   source_dir: /
   github:
-    repo: AiStartup101/sample-nodejs
+    repo: dineshh-karpe/sample-nodejs
     branch: main
   run_command: npm run start:prod
   environment_slug: node-js

@@ -42,13 +42,13 @@ A secure and scalable NestJS application with TypeScript, health monitoring, and
 
 ### One-Click Deploy
 
-[![Deploy to DigitalOcean](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/AiStartup101/sample-nodejs/tree/main)
+[![Deploy to DigitalOcean](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/dineshh-karpe/sample-nodejs/tree/main)
 
 ### Local Development
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/AiStartup101/sample-nodejs.git
+   git clone https://github.com/dineshh-karpe/sample-nodejs.git
    cd sample-nodejs
    ```
 
