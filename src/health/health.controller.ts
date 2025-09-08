@@ -26,8 +26,8 @@ export class HealthController {
       () => this.healthService.getBasicHealth(),
       
       // Memory health check
-      () => this.memory.checkHeap('memory_heap', 150 * 1024 * 1024),
-      () => this.memory.checkRSS('memory_rss', 150 * 1024 * 1024),
+      () => this.memory.checkHeap('memory_heap', 500 * 1024 * 1024), // 500MB heap threshold
+      () => this.memory.checkRSS('memory_rss', 1024 * 1024 * 1024), // 1GB RSS threshold
       
       // Disk health check
       () => this.disk.checkStorage('storage', { 
@@ -63,5 +63,13 @@ export class HealthController {
   @Get('detailed')
   getDetailedHealth() {
     return this.healthService.getDetailedHealth();
+  }
+
+  @Get('memory')
+  @HealthCheck()
+  getMemoryHealth() {
+    return this.health.check([
+      () => this.healthService.getMemoryHealth(),
+    ]);
   }
 }

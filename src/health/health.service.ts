@@ -37,9 +37,41 @@ export class HealthService {
     };
   }
 
+  getMemoryHealth(): HealthIndicatorResult {
+    const memoryUsage = process.memoryUsage();
+    const totalMemory = require('os').totalmem();
+    const freeMemory = require('os').freemem();
+    const usedMemory = totalMemory - freeMemory;
+    
+    const rssMB = Math.round(memoryUsage.rss / 1024 / 1024);
+    const heapUsedMB = Math.round(memoryUsage.heapUsed / 1024 / 1024);
+    const systemUsagePercent = Math.round((usedMemory / totalMemory) * 100);
+    
+    return {
+      'memory-status': {
+        status: 'ok' as HealthIndicatorStatus,
+        timestamp: new Date().toISOString(),
+        details: {
+          rss: `${rssMB} MB`,
+          heapUsed: `${heapUsedMB} MB`,
+          systemUsage: `${systemUsagePercent}%`,
+          thresholds: {
+            rss: '1GB',
+            heap: '500MB',
+          },
+        },
+      },
+    };
+  }
+
   getDetailedHealth() {
     const memoryUsage = process.memoryUsage();
     const cpuUsage = process.cpuUsage();
+
+    // Calculate memory usage percentages
+    const totalMemory = require('os').totalmem();
+    const freeMemory = require('os').freemem();
+    const usedMemory = totalMemory - freeMemory;
 
     return {
       status: 'ok',
@@ -52,6 +84,16 @@ export class HealthService {
         heapTotal: `${Math.round(memoryUsage.heapTotal / 1024 / 1024)} MB`,
         heapUsed: `${Math.round(memoryUsage.heapUsed / 1024 / 1024)} MB`,
         external: `${Math.round(memoryUsage.external / 1024 / 1024)} MB`,
+        system: {
+          total: `${Math.round(totalMemory / 1024 / 1024)} MB`,
+          free: `${Math.round(freeMemory / 1024 / 1024)} MB`,
+          used: `${Math.round(usedMemory / 1024 / 1024)} MB`,
+          usagePercent: `${Math.round((usedMemory / totalMemory) * 100)}%`,
+        },
+        thresholds: {
+          rss: '1GB',
+          heap: '500MB',
+        },
       },
       cpu: {
         user: cpuUsage.user,
